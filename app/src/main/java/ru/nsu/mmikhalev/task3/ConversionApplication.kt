@@ -30,6 +30,10 @@ class ConversionApplication : ComponentActivity() {
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         initCurrency()
+
+        binding.currencyChange.convertButton.setOnClickListener {
+            performConversion()
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -47,22 +51,42 @@ class ConversionApplication : ComponentActivity() {
 
                 val fromCurrencyAdapter = ArrayAdapter(
                     this@ConversionApplication,
-                    android.R.layout.simple_spinner_item,
+                    R.layout.spinner_layout,
                     countries
                 )
-                fromCurrencyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                fromCurrencyAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
 
                 binding.currencyChange.fromCurrencySpinner.adapter = fromCurrencyAdapter
 
                 val toCurrencyAdapter = ArrayAdapter(
                     this@ConversionApplication,
-                    android.R.layout.simple_spinner_item,
+                    R.layout.spinner_layout,
                     countries
                 )
-                toCurrencyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                toCurrencyAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
                 binding.currencyChange.toCurrencySpinner.adapter = toCurrencyAdapter
-
             }
         }
+    }
+
+    private fun performConversion() {
+        val amountText = binding.currencyChange.amountEditText.text.toString()
+        if (amountText.isBlank()) {
+            binding.currencyChange.resultCurrencySpinner.setText("Введите сумму")
+            return
+        }
+
+        val amount = amountText.toDoubleOrNull()
+        if (amount == null || amount <= 0) {
+            binding.currencyChange.resultCurrencySpinner.setText("Некорректная сумма")
+            return
+        }
+
+        val conversionRate = currencyService.convertCurrency(
+            binding.currencyChange.fromCurrencySpinner.selectedItem.toString(),
+            binding.currencyChange.toCurrencySpinner.selectedItem.toString(),
+            amount
+        )
+        binding.currencyChange.resultCurrencySpinner.setText(conversionRate?.toString())
     }
 }
