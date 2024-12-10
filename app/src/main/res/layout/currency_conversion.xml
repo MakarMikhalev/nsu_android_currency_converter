@@ -1,0 +1,120 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/activityMain"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@color/white"
+tools:context=".ConversionApplication">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="24dp"
+    android:background="@drawable/rounded_background"
+    android:padding="24dp">
+
+    <!-- Spinner для исходной валюты -->
+    <Spinner
+        android:id="@+id/fromCurrencySpinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/spinner_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed" />
+
+    <!-- Поле для ввода суммы -->
+    <EditText
+        android:id="@+id/amountEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/rounded_edittext"
+        android:hint="Введите сумму"
+        android:inputType="numberDecimal"
+        android:padding="16dp"
+        android:textColor="@android:color/black"
+        android:textColorHint="@android:color/darker_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fromCurrencySpinner"
+        app:layout_constraintHorizontal_chainStyle="packed" />
+
+    <!-- Стрелка для направления конверсии -->
+    <ImageView
+        android:id="@+id/arrowImage"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="Стрелка"
+        android:src="@drawable/ic_arrow_forward"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/amountEditText"
+        app:layout_constraintHorizontal_chainStyle="packed" />
+
+    <!-- Поле для вывода  суммы -->
+    <EditText
+        android:id="@+id/resultEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/rounded_edittext"
+        android:hint="Введите сумму"
+        android:inputType="numberDecimal"
+        android:padding="16dp"
+        android:textColor="@android:color/black"
+        android:textColorHint="@android:color/darker_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fromCurrencySpinner"
+        app:layout_constraintHorizontal_chainStyle="packed" />
+
+    <!-- Spinner для целевой валюты -->
+    <Spinner
+        android:id="@+id/toCurrencySpinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/spinner_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/arrowImage"
+        app:layout_constraintHorizontal_chainStyle="packed" />
+
+    <EditText
+        android:id="@+id/resultCurrencySpinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/rounded_edittext"
+        android:hint="Переведенная сумма"
+        android:inputType="numberDecimal"
+        android:padding="16dp"
+        android:textColor="@android:color/black"
+        android:textColorHint="@android:color/darker_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toCurrencySpinner"
+        app:layout_constraintHorizontal_chainStyle="packed" />
+
+    <!-- Кнопка для конвертации -->
+    <Button
+        android:id="@+id/convertButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/rounded_button"
+        android:text="Конвертировать"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/resultCurrencySpinner"
+        app:layout_constraintHorizontal_chainStyle="packed" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
+
