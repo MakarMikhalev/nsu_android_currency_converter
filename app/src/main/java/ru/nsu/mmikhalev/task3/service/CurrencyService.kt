@@ -11,9 +11,9 @@ class CurrencyService(private val imageLoaderService: ImageLoaderService) {
         val currencyListDTO = CurrencyClient.getAll()
         currencyMap = currencyListDTO.associate { dto ->
             dto.charCode to Currency(
-                name = dto.name,
-                charCode = dto.charCode,
-                value = dto.value?.replace(",", ".")?.toDoubleOrNull(),
+                name = dto.name ?: "",
+                charCode = dto.charCode ?: "",
+                value = dto.value?.replace(",", ".")?.toDoubleOrNull() ?: 0.0,
                 imageId = imageLoaderService.getImageByKey(dto.charCode)
             )
         }
@@ -35,7 +35,7 @@ class CurrencyService(private val imageLoaderService: ImageLoaderService) {
         val toCurrency = currencyMap[toCurrencyName]
 
         if (fromCurrency?.value != null && toCurrency?.value != null) {
-            return (amount * fromCurrency.value!!) / toCurrency.value!!
+            return (amount * fromCurrency.value) / toCurrency.value
         }
         return null
     }
